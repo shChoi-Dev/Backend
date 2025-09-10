@@ -19,14 +19,14 @@ public class InputServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		System.out.println("init 실행");
+		System.out.println("init 실행, 첫번째 요청이 들어왔을때 한번 실행, 동일 요청에 대해서는 인스턴스 새로 생성 하지 않음");
 	}
 
 	/**
 	 * @see Servlet#destroy()
 	 */
 	public void destroy() {
-		System.out.println("destroy 실행");
+		System.out.println("인스턴스 없어질 때 한번 실행, 서버 재시작, 웹어플리케이션 리로드 인스턴스 삭제");
 	}
 
 	/**
