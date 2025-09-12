@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>숫자 맞히기 게임</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 <div class="container">
-        <h2>🎮 숫자 알아맞히기 게임</h2>
+        <h2>🤔 숫자 알아맞히기 게임</h2>
         <p>1부터 10 사이의 숫자를 맞춰보세요!</p>
 
         <form action="guess" method="post">
@@ -35,7 +35,7 @@
         <%
         	} else {
         %>
-        	<p style="margin-top: 30px;"><a href="index.html">메인으로 돌아가기</a></p>
+        	<p style="margin-top: 30px;"><a href="index.html" class="back-button">메인으로 돌아가기</a></p>
         <%
         	}
         %>

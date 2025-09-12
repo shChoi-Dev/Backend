@@ -1,4 +1,4 @@
-package web;
+package game;
 
 import java.io.IOException;
 import java.util.Random;
@@ -28,6 +28,9 @@ public class GuessServlet extends HttpServlet {
         session.setAttribute("randomNumber", random.nextInt(10) + 1);
         session.setAttribute("attempts", 0);
 
+        // 게임 종료 상태 초기화
+        request.setAttribute("gameEnd", false);
+
         // JSP 페이지로 포워딩
         request.getRequestDispatcher("/guess.jsp").forward(request, response);
 	}
@@ -51,11 +54,31 @@ public class GuessServlet extends HttpServlet {
         String message;
         boolean gameEnd = false;
 
-
+        try {
             // 사용자가 입력한 값 가져오기
             int userGuess = Integer.parseInt(request.getParameter("userGuess"));
             attempts++; // 시도 횟수 증가
 
+            // 정답 비교
+            if (userGuess == randomNumber) {
+                message = "🙌 드디어 맞혔습니다! 정답은 " + randomNumber + "입니다. (" + attempts + "번 만에 성공!)";
+                gameEnd = true;
+                session.removeAttribute("randomNumber"); // 게임이 끝났으므로 세션에서 정답 제거
+            } else if (userGuess > randomNumber) {
+                message = "🙈 아쉽네요! " + userGuess + "보다는 작습니다. 다시 시도해보세요.";
+            } else {
+                message = "🙈 아쉽네요! " + userGuess + "보다는 큽니다. 다시 시도해보세요.";
+            }
+            session.setAttribute("attempts", attempts); // 업데이트된 시도 횟수 저장
+            
+        } catch (NumberFormatException e) {
+            message = "🙅‍♂️ ‍잘못된 입력입니다. 1~10 사이의 숫자를 입력해주세요.";
+        }
+
+        // 결과를 request에 담아 JSP로 전달
+        request.setAttribute("message", message);
+        request.setAttribute("gameEnd", gameEnd);
+        request.getRequestDispatcher("/guess.jsp").forward(request, response);
 	}
 
 }
