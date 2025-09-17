@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 주입할 클래스를 bean으로 생성 
+		bean의 id는 일반적으로 클래스명의 첫글자만 소문자로 id명을 구성
+	-->
+	<bean id = "nameService" class="di_01.com.di.spring_di_xml_constructor.NameService"/>
+	
+	<!-- 주입 받을 클래스 bean 생성 후 내부 태그로 constructor-arg 사용 : 생성자에 주입 -->
+	<bean id = "nameController" class="di_01.com.di.spring_di_xml_constructor.NameController">
+		<constructor-arg ref="nameService"/>
+	</bean>
+
+</beans>
