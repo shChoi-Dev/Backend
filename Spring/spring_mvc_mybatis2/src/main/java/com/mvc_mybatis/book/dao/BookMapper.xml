@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 아래 mapper에서 구현되는 기능은 IBookDAO 추상 메소드로 한정 됨-->
+  <mapper namespace="com.mvc_mybatis.book.dao.IBookDAO">
+  
+  <!-- resultMap 구성 : 반환되는 rs의 컬럼과 저장해야하는 vo 클래스의 필드명을 매핑하는 역할 -->
+  <resultMap id="bookResult" type="com.mvc_mybatis.book.model.BookVO">
+	 	<result property="bookNo" column="bookNo"/>
+	 	<result property="bookName" column="bookName"/>
+	 	<result property="bookAuthor" column="bookAuthor"/>
+	 	<result property="bookPrice" column="bookPrice"/>
+	 	<result property="bookDate" column="bookDate"/>
+	 	<result property="bookStock" column="bookStock"/>
+	 	<result property="pubNo" column="pubNo"/>
+	 </resultMap>
+	 
+	<select id="listAllBook" resultMap="bookResult">
+		Select * FROM book ORDER BY bookNo
+	</select>
+</mapper>
