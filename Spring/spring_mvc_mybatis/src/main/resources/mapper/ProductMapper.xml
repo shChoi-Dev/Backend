@@ -28,9 +28,37 @@
 	 	<result property="prdDate" column="prdDate"/>
 	 </resultMap>
 	 
+	 <!-- db에서 반환되는 rs set이 0개 이상임 : 한개의 vo에 레코드를 저장하고 vo를 collection에 저장해야 함
+	 	  collection 구성은 자동 진행함
+	  -->
 	<select id="listAllProduct" resultMap="prdResult">
 		Select * FROM product ORDER BY prdNo
 	</select>
+	<!-- 변수자리에 사용할 수 있는 기호 : #{필드명/변수명}, ${필드명/변수명}
+		 #{} : preparedstatement의 ?
+		 ${} : statement의 변수
+	 -->
+	<insert id="insertProduct" parameterType="com.spring_mvc.mybatis.model.ProductVO">
+		INSERT INTO product (prdNo, prdName, prdPrice, prdCompany, prdStock, prdDate)
+		VALUES (#{prdNo}, #{prdName}, #{prdPrice}, #{prdCompany}, #{prdStock}, #{prdDate}) 
+	</insert>
+	
+	<!-- 상품 상세정보 조회 -->
+	<select id="detailViewProduct" parameterType="string" resultType="com.spring_mvc.mybatis.model.ProductVO">
+		SELECT * FROM product WHERE prdNo= #{prdNo}
+	</select>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="updateProduct" parameterType="com.spring_mvc.mybatis.model.ProductVO">
+		UPDATE product SET prdName=#{prdName}, prdPrice=#{prdPrice}, prdCompany=#{prdCompany}, prdStock=#{prdStock},
+						   prdDate=#{prdDate}
+		WHERE prdNo=#{prdNo} 
+	</update>
+	
+	<!-- 상품 정보 삭제 -->
+	<delete id="deleteProduct" parameterType="string">
+		DELETE FROM product where prdNo=#{prdNo}	
+	</delete>
 </mapper>
 
 

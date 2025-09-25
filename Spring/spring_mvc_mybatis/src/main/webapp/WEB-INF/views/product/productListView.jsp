@@ -18,6 +18,7 @@
 			<th>제조사</th>
 			<th>재고</th>
 			<th>제조일</th>
+			<th>사진</th>
 			</tr>
 			
 			<!-- 반복문 사용해서 모든 데이터 출력 -->
@@ -25,12 +26,13 @@
 			<!-- 날짜 포맷 설정 : 2025-05-10 형식 -->
 			<c:forEach items="${prdList}" var="prd">
 			<tr>
-				<td><a href="">${prd.prdNo}</a></td>
+				<td><a href="<c:url value='/product/detailViewProduct/${prd.prdNo}'/>">${prd.prdNo}</a></td>
 				<td>${prd.prdName}</td>
 				<td>${prd.prdPrice}</td>
 				<td>${prd.prdCompany}</td>
 				<td>${prd.prdStock}</td>
 				<td><fmt:formatDate value="${prd.prdDate}" pattern="YYYY-MM-dd"/></td>
+				<td><img src="<c:url value='/product_images/${prd.prdNo}.jpg'/>" width="30" height="20"/></td>
 			</tr>
 			</c:forEach>
 						

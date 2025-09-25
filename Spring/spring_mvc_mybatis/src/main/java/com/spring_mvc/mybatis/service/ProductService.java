@@ -22,26 +22,22 @@ public class ProductService implements IProductService {
 
 	@Override
 	public void insertProduct(ProductVO vo) {
-		// TODO Auto-generated method stub
-		
+		dao.insertProduct(vo);
 	}
 
 	@Override
 	public void updateProduct(ProductVO prdVo) {
-		// TODO Auto-generated method stub
-		
+		dao.updateProduct(prdVo);
 	}
 
 	@Override
 	public void deleteProduct(String prdNo) {
-		// TODO Auto-generated method stub
-		
+		dao.deleteProduct(prdNo);		
 	}
 
 	@Override
-	public ProductVO detailViewProduct(String prdNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductVO detailViewProduct(String prdNo) {		
+		return dao.detailViewProduct(prdNo);
 	}
 	
 }

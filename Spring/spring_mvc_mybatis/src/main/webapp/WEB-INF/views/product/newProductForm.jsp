@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<h3>상품 정보 등록</h3>
-		<form method="post" action="<c:url value='product/insertProduct'/>">
+		<form method="post" action="<c:url value='/product/insertProduct'/>">
 			<table>
 				<tr><td>상품 번호</td><td><input type="text" name="prdNo" id="prdNo">
 				</td></tr>

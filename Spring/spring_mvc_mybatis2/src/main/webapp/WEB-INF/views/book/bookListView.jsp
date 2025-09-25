@@ -18,20 +18,22 @@
 				<th>가격</th>
 				<th>재고</th>
 				<th>출판일</th>
+				<th>출판사 번호</th>
 			</tr>
 			
-			<!-- 반복문 사용해서 모든 데이터 출력 -->
-			<!-- 상품번호에 링크 설정 : /product/detailViewProduct -->
-			<!-- 날짜 포맷 설정 : 2025-05-10 형식 -->
+			<%-- 컨트롤러가 Model에 담아 보낸 bookList를 JSTL forEach를 이용해 반복 처리 --%>
 			<c:forEach items="${bookList}" var="book">
 			<tr>
-				<td><a href="">${book.bookNo}</a></td>
+				<%-- 도서 번호를 클릭하면 해당 도서의 상세 정보 페이지로 이동하는 링크 생성 --%>
+				<td><a href="<c:url value='/book/detailViewBook/${book.bookNo}'/>">${book.bookNo}</a></td>
 				<td>${book.bookName}</td>
 				<td>${book.bookAuthor}</td>
-				<%-- 가격에 세 자리마다 콤마 추가 --%>
+				<%-- 가격을 세 자리마다 콤마(,)를 찍어 원화 형식으로 표시 --%>
 				<td><fmt:formatNumber value="${book.bookPrice}" pattern="#,###" /> 원</td>
 				<td>${book.bookStock}</td>
+				<%-- 날짜를 'yyyy-MM-dd' 형식으로 표시 --%>
 				<td><fmt:formatDate value="${book.bookDate}" pattern="yyyy-MM-dd"/></td>
+				<td>${book.pubNo}</td>
 			</tr>
 			</c:forEach>
 						

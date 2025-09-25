@@ -36,6 +36,10 @@
 				<td><input type="text" name="bookDate"></td>
 			</tr>
 			<tr>
+                <td>출판사 번호</td>
+                <td><input type="text" name="pubNo"></td>
+            </tr>
+			<tr>
 				<td colspan="2"><input type="submit" value="등록"> <input
 					type="reset" value="취소"></td>
 			</tr>
