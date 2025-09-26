@@ -55,4 +55,10 @@ public class BookService implements IBookService {
 		return dao.detailViewBook(bookNo);
 	}
 
+	@Override
+	public String bookNoCheck(String bookNo) {
+		// TODO Auto-generated method stub
+		return dao.bookNoCheck(bookNo);
+	}
+
 }

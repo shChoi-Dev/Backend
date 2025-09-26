@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mvc_mybatis.book.model.BookVO;
 import com.mvc_mybatis.book.service.BookService;
@@ -112,5 +114,20 @@ public class BookController {
 		service.deleteBook(bookNo);
 		// 2. 삭제 완료 후, 전체 도서 목록 페이지로 리다이렉트
 		return "redirect:/book/listAllBook";
+	}
+	
+	// ========================================================================= //
+	
+	// 도서정보 중복 확인 처리
+	@ResponseBody
+	@RequestMapping("/book/bookNoCheck")
+	public String bookNoCheck(@RequestParam("bookNo") String bookNo) {
+		String bookNo_result = service.bookNoCheck(bookNo);
+		System.out.println(bookNo);
+		String result = "available";
+		if (bookNo_result != null) {
+			result = "no_available";
+		}
+		return result;
 	}
 }

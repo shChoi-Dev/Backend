@@ -1,6 +1,7 @@
 package com.spring_mvc.mybatis.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,24 +11,36 @@ import com.spring_mvc.mybatis.dao.IProductDAO;
 import com.spring_mvc.mybatis.model.ProductVO;
 
 @Service
-public class ProductService implements IProductService {
+public class ProductService implements IProductService{
 	@Autowired
 	@Qualifier("IProductDAO")
 	IProductDAO dao;
+
+	@Override
+	public String prdNoCheck(String prdNo) {
+		return dao.prdNoCheck(prdNo);
+	}
+	
 	
 	@Override
-	public ArrayList<ProductVO> listAllProduct() {
+	public ArrayList<ProductVO> productSearch(HashMap<String, Object> map) {
+		return dao.productSearch(map);
+	}
+
+
+	@Override
+	public ArrayList<ProductVO> listAllProduct() {		
 		return dao.listAllProduct();
 	}
 
 	@Override
 	public void insertProduct(ProductVO vo) {
-		dao.insertProduct(vo);
+		dao.insertProduct(vo);		
 	}
 
 	@Override
 	public void updateProduct(ProductVO prdVo) {
-		dao.updateProduct(prdVo);
+		dao.updateProduct(prdVo);		
 	}
 
 	@Override
@@ -36,7 +49,8 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public ProductVO detailViewProduct(String prdNo) {		
+	public ProductVO detailViewProduct(String prdNo) {
+		
 		return dao.detailViewProduct(prdNo);
 	}
 	
