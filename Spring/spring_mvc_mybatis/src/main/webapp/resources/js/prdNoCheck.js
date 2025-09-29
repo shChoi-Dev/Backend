@@ -1,9 +1,9 @@
 $(document).ready(function(){
-	$('#prdNoCheckBtn').on('click',function(){
+	$('#prdNoCheckBtn').on('click', function(){
 		event.preventDefault();
 		
 		let prdNo = $('#prdNo').val();
-		
+	
 		if(prdNo == ""){
 			alert("상품번호를 입력하세요");
 			return false;
@@ -14,20 +14,18 @@ $(document).ready(function(){
 				data:{"prdNo":prdNo},
 				dataType:"text",
 				success:function(result){
-					console.log(result);
 					if(result=="available"){
-						alert("사용가능한 번호 입니다");
-					}else{
+						alert("사용가능한 번호 입니다.");
+					}else {
 						alert("사용 불가능한 번호 입니다.");
 					}
 				},
 				error:function(data, textStatus){
-					alert("전송실패");				
+					alert("전송실패");
 				}
-			
+				
 			});
-		
-		}	
+		}
 	
-	});//on 종료
-});//ready 종료
+	}); // on 종료
+}); // ready 종료

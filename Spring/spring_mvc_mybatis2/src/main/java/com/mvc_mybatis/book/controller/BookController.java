@@ -1,6 +1,7 @@
 package com.mvc_mybatis.book.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,7 @@ public class BookController {
 	}
 
 	/**
-	 * 전체 도서 정보 조회 
-	 * /book/listAllBook URL 요청을 처리하는 메소드
+	 * 전체 도서 정보 조회 /book/listAllBook URL 요청을 처리하는 메소드
 	 */
 	@RequestMapping("/book/listAllBook")
 	public String listAllBook(Model model) {
@@ -41,8 +41,7 @@ public class BookController {
 	}
 
 	/**
-	 * 도서 등록 폼 요청 
-	 * /book/newBookForm URL 요청 시 도서 등록 페이지를 보여줌
+	 * 도서 등록 폼 요청 /book/newBookForm URL 요청 시 도서 등록 페이지를 보여줌
 	 */
 	@RequestMapping("/book/newBookForm")
 	public String newProductForm() {
@@ -50,9 +49,8 @@ public class BookController {
 	}
 
 	/**
-	 * 도서 정보 등록 처리 
-	 * /book/insertBook URL로 POST 요청이 오면 이 메소드가 처리 
-	 * 폼에서 입력된 값들은 BookVO 객체(vo)에 자동으로 매핑됨
+	 * 도서 정보 등록 처리 /book/insertBook URL로 POST 요청이 오면 이 메소드가 처리 폼에서 입력된 값들은 BookVO
+	 * 객체(vo)에 자동으로 매핑됨
 	 */
 	@RequestMapping("/book/insertBook")
 	public String insertProduct(BookVO vo) {
@@ -63,9 +61,8 @@ public class BookController {
 	}
 
 	/**
-	 * 도서 상세 정보 조회 
-	 * /book/detailViewBook/{bookNo} 형태의 URL 요청을 처리 
-	 * {bookNo} 부분은 @PathVariable을 통해 변수로 받아옴
+	 * 도서 상세 정보 조회 /book/detailViewBook/{bookNo} 형태의 URL 요청을 처리 {bookNo}
+	 * 부분은 @PathVariable을 통해 변수로 받아옴
 	 */
 	@RequestMapping("/book/detailViewBook/{bookNo}")
 	public String detailViewBook(@PathVariable String bookNo, Model model) {
@@ -78,8 +75,7 @@ public class BookController {
 	}
 
 	/**
-	 * 도서 정보 수정 폼 요청 
-	 * /book/updateBookForm/{bookNo} URL 요청 시, 기존 도서 정보를 담은 수정 페이지를 반환
+	 * 도서 정보 수정 폼 요청 /book/updateBookForm/{bookNo} URL 요청 시, 기존 도서 정보를 담은 수정 페이지를 반환
 	 */
 	@RequestMapping("/book/updateBookForm/{bookNo}")
 	public String updateBookForm(@PathVariable String bookNo, Model model) {
@@ -92,9 +88,8 @@ public class BookController {
 	}
 
 	/**
-	 * 도서 정보 수정 로직 처리 
-	 * updateBookForm.jsp에서 '수정' 버튼을 누르면 이 메소드가 /book/updateBook 요청을 받아 처리
-	 * 폼의 input 값들은 BookVO 객체(book)에 자동으로 바인딩됨
+	 * 도서 정보 수정 로직 처리 updateBookForm.jsp에서 '수정' 버튼을 누르면 이 메소드가 /book/updateBook 요청을
+	 * 받아 처리 폼의 input 값들은 BookVO 객체(book)에 자동으로 바인딩됨
 	 */
 	@RequestMapping("/book/updateBook")
 	public String updateBook(BookVO book) {
@@ -105,8 +100,7 @@ public class BookController {
 	}
 
 	/**
-	 * 도서 정보 삭제 로직 처리 
-	 * /book/deleteBook/{bookNo} URL 요청을 받아 특정 도서 정보를 삭제
+	 * 도서 정보 삭제 로직 처리 /book/deleteBook/{bookNo} URL 요청을 받아 특정 도서 정보를 삭제
 	 */
 	@RequestMapping("/book/deleteBook/{bookNo}")
 	public String deleteBook(@PathVariable String bookNo) {
@@ -115,9 +109,9 @@ public class BookController {
 		// 2. 삭제 완료 후, 전체 도서 목록 페이지로 리다이렉트
 		return "redirect:/book/listAllBook";
 	}
-	
+
 	// ========================================================================= //
-	
+
 	// 도서정보 중복 확인 처리
 	@ResponseBody
 	@RequestMapping("/book/bookNoCheck")
@@ -130,4 +124,26 @@ public class BookController {
 		}
 		return result;
 	}
+
+	// 상품검색 폼2 요청 처리
+	@RequestMapping("/book/bookSearchForm2")
+	public String bookSearchForm2() {
+		return "book/bookSearchForm2";
+	}
+
+	// 상품 검색 처리2
+	// 파라미터 2개 전송됨 : 검색기준, 검색어 : type : prdName keyword : 모니터
+	@RequestMapping("/book/bookSearch2")
+	public String bookSearch2(@RequestParam HashMap<String, Object> param, Model model) {
+		ArrayList<BookVO> bookList = service.bookSearch(param);
+		model.addAttribute("bookList", bookList);
+
+		return "book/bookSearchResultView";
+	}
+	
+	//상품검색 폼3 요청 처리
+	@RequestMapping("/book/bookSearchForm3")
+	public String bookSearchForm3() {
+		return "book/bookSearchForm3";
+	}	
 }

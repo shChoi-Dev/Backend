@@ -1,6 +1,7 @@
 package com.mvc_mybatis.book.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.mvc_mybatis.book.model.BookVO;
 
@@ -11,5 +12,6 @@ public interface IBookService {
 	void updateBook(BookVO bookVo);		  // 도서 정보 수정
 	void deleteBook(String bookNo);		  // 도서 정보 삭제
 	BookVO detailViewBook(String bookNo); // 상세 도서 조회
-	String bookNoCheck(String bookNo);    //도서번호 중복 확인
+	String bookNoCheck(String bookNo);    // 도서번호 중복 확인
+	ArrayList<BookVO> bookSearch(HashMap<String,Object> map); //도서검색
 }
