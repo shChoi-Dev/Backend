@@ -18,11 +18,20 @@
 		<a href="<c:url value='/product/productSearchForm3'/>">상품 검색3</a><br>
 		<hr>
 		이미지 표현<br>
-		<img src="/mybatis/resources/image/apple.png"><br>
+		<img src="<c:url value='/image/apple.png'/>"><br>
 		<hr>
 		<h3>Ajax연습</h3>
 		<a href="<c:url value='/loginForm'/>">로그인</a><br>
 		<a href="<c:url value='/loginForm2'/>">로그인2</a><br>
+		
+		<hr>
+		<h3>파일 업로드</h3>
+		<a href="<c:url value='/fileUploadForm'/>">파일 업로드</a><br>
+		<a href="<c:url value='/imageFileUploadForm'/>">비동기 방식을 통한 파일 업로드</a><br>
+		
+		<hr>
+		<h3>파일 다운로드</h3>
+		<a href="<c:url value='/fileDownloadList'/>">파일 다운로드</a><br>
 
 </body>
 </html>

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>도서 정보 등록</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>" ></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script src="<c:url value='/js/bookNoCheck.js'/>" ></script>
 </head>
 <body>

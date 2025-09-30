@@ -11,7 +11,6 @@
 	<body>
 		<h3>전체 상품 조회</h3>		
 		<table border="1" width="600">
-			<table border="1" width="600">
 			<tr><th>상품번호</th>
 			<th>상품명</th>
 			<th>상품가격</th>

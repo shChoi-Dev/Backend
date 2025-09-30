@@ -10,12 +10,12 @@
 		<script src="<c:url value='/js/bookSearch2.js'/>"></script>
 	</head>
 	<body>
-		<h3>도서 검색</h3>
+		<h3>도서 검색 (Controller + View 반환)</h3>
 		<form id="bookSearchFrm2">
 			<select id="type" name="type">
 				<option value="">검색 조건 선택</option>
 				<option value="bookName">도서명</option>
-				<option value="pubNo">출판사명</option>
+				<option value="pubNo">출판사 번호</option>
 			</select>
 			<input type="text" name="keyword" id="keyword">
 			<input type="submit" value="검색">

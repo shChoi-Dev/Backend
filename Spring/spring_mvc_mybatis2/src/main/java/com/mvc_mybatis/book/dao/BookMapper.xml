@@ -50,17 +50,4 @@
 		SELECT bookNo FROM book WHERE bookNo=#{bookNo}
 	</select>
 	
-	<!-- 도서 검색 -->
-	<select id="bookSearch" parameterType="hashmap" resultMap="bookResult">
-		SELECT * FROM book WHERE
-			<choose>
-				<when test="type != null and type.equals('bookName')">
-					bookName LIKE '%'||#{keyword}||'%'
-				</when>
-				<when test="type != null and type.equals('pubNo')">
-					pubNo LIKE '%'||#{keyword}||'%'
-				</when>
-			</choose> 
-	</select>
-	
 </mapper>

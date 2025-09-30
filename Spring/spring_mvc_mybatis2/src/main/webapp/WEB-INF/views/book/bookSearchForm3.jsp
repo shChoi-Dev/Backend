@@ -5,12 +5,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>도서 검색 (AJAX)</title>
+		<title>도서 검색 3</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
 		<script src="<c:url value='/js/bookSearch3.js'/>"></script>
 	</head>
 	<body>
-		<h3>도서 검색 (REST)</h3>
+		<h3>도서 검색 3 (Controller + @RestController)</h3>
 		<form id="bookSearchFrm3">
 			<select id="type" name="type">
 				<option value="">검색 조건 선택</option>
@@ -26,8 +26,4 @@
 		<a href="<c:url value='/'/>">메인 화면으로 이동</a>
 	</body>
 </html>
-
-
-
-
 
