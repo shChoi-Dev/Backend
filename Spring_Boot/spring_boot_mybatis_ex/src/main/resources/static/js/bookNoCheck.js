@@ -12,7 +12,7 @@ $(document).ready(function(){
 		}else{ 
 			$.ajax({
 				type:"post",
-				url:"/book/book/bookNoCheck", // BookController의 URL로 변경
+				url:"/book/bookNoCheck", // BookController의 URL로 변경
 				data:{"bookNo":bookNo},      // 전송할 데이터의 key를 'bookNo'로 변경
 				dataType:"text",
 				success:function(result){

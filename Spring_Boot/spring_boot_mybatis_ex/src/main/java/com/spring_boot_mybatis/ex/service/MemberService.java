@@ -27,10 +27,11 @@ public class MemberService implements IMemberService{
 	
 	@Override
 	public String loginCheck(HashMap<String, Object> map) {
-		// 로그인 여부 서비스가 결정(id만 dao로 전달해서 id의 레코드가 있으면 비밀번호를 전달)
+		// 1. 전달받은 아이디로 DB에서 암호화된 비밀번호를 조회
 		String encodedPwd = dao.loginCheck((String)map.get("id"));
 		
 		String result = "fail";
+		// 2. DB에 비밀번호가 존재하고, 입력된 평문 비밀번호와 일치하는지 확인
 		if(encodedPwd != null && pwdEncoder.matches((String)map.get("pwd"), encodedPwd)) {
 			result = "success";
 		}

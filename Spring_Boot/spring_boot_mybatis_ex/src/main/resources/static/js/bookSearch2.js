@@ -18,7 +18,7 @@ $(document).ready(function(){
 		}else{
 			$.ajax({
 				type:"post",			
-				url:"/book/book/bookSearch2",	// BookController의 bookSearch2() 메소드 호출
+				url:"/book/bookSearch2",	// BookController의 bookSearch2() 메소드 호출
 				data: formData,			
 				// dataType을 지정하지 않으면 jQuery가 응답 타입을 자동으로 판단 (여기서는 HTML)
 				success:function(result){

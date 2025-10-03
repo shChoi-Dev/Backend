@@ -1,31 +1,27 @@
 package com.spring_boot_mybatis.ex.controller;
 
 import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.spring_boot_mybatis.ex.model.MemberVO;
 import com.spring_boot_mybatis.ex.service.MemberService;
-
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession; // HttpSession import
 
 @Controller
 public class MemberController {
 	
 	@Autowired
 	MemberService memService;
-	
-	// 로그인 폼 페이지를 보여주는 요청
-	@RequestMapping("/login")
-	public String viewLoginForm() {
-	    return "member/loginForm"; // /WEB-INF/views/member/loginForm.jsp
-	}
 	
 	// 로그인 폼 요청 처리
 	@GetMapping("/member/loginForm")
@@ -101,7 +97,7 @@ public class MemberController {
 					   @RequestParam("memHp3") String memHp3
 						) {
 		String memHp = memHp1 + "-" + memHp2 + "-" + memHp3;
-		vo.setMemHP(memHp);
+		vo.setMemHp(memHp);
 		memService.insertMember(vo);
 		return "redirect:/member/loginForm";
 	}

@@ -9,6 +9,12 @@
 	</head>
 	<body>
 		<h3>MyBatis 사용 DB 연동 : 도서 관리</h3><br>
+		
+		<h4>--- 회원 관리 ---</h4>
+		<a href="<c:url value='/member/loginForm'/>">로그인</a><br>
+		<a href="<c:url value='/member/joinForm'/>">회원가입</a><br><br>
+		
+		<h4>--- 도서 관리 ---</h4>
 		<a href="<c:url value='/book/listAllBook'/>">전체 도서정보 조회</a><br>
 		<a href="<c:url value='/book/newBookForm'/>">도서 등록</a><br>
 		

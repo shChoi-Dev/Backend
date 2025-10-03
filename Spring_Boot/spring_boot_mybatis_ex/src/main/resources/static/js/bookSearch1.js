@@ -20,7 +20,7 @@ $(document).ready(function(){
 		}else{		
 			$.ajax({
 				type:"post", // HTTP 요청 방식
-				url:"/book/book/bookSearch1", // 도서 검색을 처리하는 컨트롤러의 URL
+				url:"/book/bookSearch1", // 도서 검색을 처리하는 컨트롤러의 URL
 				data: formData, // 서버로 전송할 데이터
 				dataType: "json", // 서버로부터 JSON 형식의 응답을 기대
 				success:function(result){ // 요청이 성공하면 'result' 매개변수로 JSON 데이터가 전달
@@ -49,7 +49,7 @@ $(document).ready(function(){
 				    		let bookDate = `${year}-${month}-${date}`;
 				
 							// JavaScript 문자열 연결을 사용하여 상세 보기 링크를 동적으로 생성
-				 			let detailLink = '<a href="/book/book/detailViewBook/' + result[i].bookNo + '">' + result[i].bookNo + '</a>';
+				 			let detailLink = '<a href="/book/detailViewBook/' + result[i].bookNo + '">' + result[i].bookNo + '</a>';
 				
 
 							// 각 도서 정보가 담긴 행(tr)을 테이블에 추가

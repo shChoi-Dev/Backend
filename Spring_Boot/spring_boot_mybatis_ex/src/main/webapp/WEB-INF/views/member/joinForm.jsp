@@ -5,14 +5,18 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>회원 가입 폼</title>	
-		<c:import url="/WEB-INF/views/layout/head.jsp"/>
-
+		<title>회원 가입 폼</title>
+		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
+		
+    	
+    
+    	<script src="<c:url value='/js/idCheck.js'/>"></script>
+    	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    	<script src="<c:url value='/js/searchZip.js'/>"></script>	
+    	
 	</head>
 	<body>
 	<div id="wrap">
-		<!-- top.jsp 임포트 -->
-			<c:import url="/WEB-INF/views/layout/top.jsp"/>
 		<section>
 	        <h1 id="title">회원 가입</h1>
 	        <form id="joinForm" name="joinForm" method="post"  
@@ -60,8 +64,6 @@
 	            </table>
 	      </form>	
       </section>
-    <!-- bottom.jsp 임포트 -->
-	<c:import url="/WEB-INF/views/layout/bottom.jsp"/>
      </div>
     </body>
 </html>

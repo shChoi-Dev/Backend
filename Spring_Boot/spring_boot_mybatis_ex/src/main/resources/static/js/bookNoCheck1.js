@@ -10,7 +10,7 @@ $(document).ready(function(){
 		}else{
 			$.ajax({
 				type:"get",
-				url:"/book/book/bookNoCheck1/" + bookNo, // BookController의 URL로 변경
+				url:"/book/bookNoCheck1/" + bookNo, // BookController의 URL로 변경
 				dataType:"text",
 				success:function(result){
 					if(result=="available"){

@@ -8,7 +8,7 @@ $(document).ready(function(){
 			alert("도서번호를 입력하세요.");
 			return false;
 		}else{
-			fetch("/book/book/bookNoCheck3/", { // BookController의 URL로 변경
+			fetch("/book/bookNoCheck3/", { // BookController의 URL로 변경
 				method:'post',
 				headers:{
 					'Content-Type':'application/json'

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 폼</title>
+<script src="<c:url value='/js/login.js'/>"></script>
 </head>
 <body>
 	<div id="wrap">

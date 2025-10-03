@@ -22,7 +22,7 @@ $(document).ready(function(){
 			// jQuery의 $.ajax() 함수를 사용하여 서버에 비동기 HTTP 요청을 보냄
 			$.ajax({
 				type:"post",			// HTTP 요청 메소드를 POST로 설정
-				url:"/book/book/bookSearch3",	// 요청을 보낼 서버의 URL 주소 / BookRestController의 bookSearch3() 메소드 호출
+				url:"/book/bookSearch3",	// 요청을 보낼 서버의 URL 주소 / BookRestController의 bookSearch3() 메소드 호출
 				data: formData,			// 서버로 전송할 데이터
 				dataType: "json",       // 서버로부터 받을 응답 데이터의 타입을 JSON으로 받음
 				success:function(result){	// 서버로부터 성공적으로 응답을 받았을 때 실행되는 함수
@@ -45,7 +45,7 @@ $(document).ready(function(){
 				    		let date = (book_date.getDate()).toString().padStart(2,'0');
 				    		let bookDate = `${year}-${month}-${date}`;
 
-							let detailUrl = '/book/book/detailViewBook/' + result[i].bookNo;
+							let detailUrl = '/book/detailViewBook/' + result[i].bookNo;
 
 				    		table += '<tr><td><a href="' + detailUrl + '">' + result[i].bookNo +'</a></td><td>' +
 				    				 result[i].bookName +'</td><td>' +
