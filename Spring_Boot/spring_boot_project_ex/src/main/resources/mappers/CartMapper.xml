@@ -33,8 +33,60 @@
 	<select id="cartList" parameterType="string" resultType="com.spring_boot.projectEx.model.CartVO" >
 		SELECT c.cartNo, p.prdNo, p.prdImg, p.prdName, p.prdPrice, c.cartQty, c.memId
 		FROM product p, cart c
-		WHERE p.prdNo=c.prdNo AND memId=#{memId}
+		WHERE p.prdNo=c.prdNo AND c.memId=#{memId}
 		ORDER BY c.cartNo
 	</select>
+	
+	<!-- 특정 회원이 전달한 장바구니 삭제 목록 ArrayList로 받아서 해당 목록 삭제 
+		 ArrayList의 원소에는 cartNo가 포함되어 있음
+		 List 형태의 파라미터 이므로 원소 각각 추출해서 delete 진행
+		 delete from cart where cartNo in (List 원소1, 원소2, ...)
+		 mybatis tag <foreach> 사용
+	-->
+	<delete id="deleteCart" parameterType="List">
+		DELETE FROM cart WHERE cartNo IN
+		<foreach collection="list" item="item" index="i" open="(" separator="," close=")">
+			#{item}
+		</foreach> 
+	</delete>
+	
+	<!-- 주문 진행 시 변경 수량 최종 수정 -->
+	<update id="updateCart" parameterType="com.spring_boot.projectEx.model.CartVO">
+		UPDATE cart
+		SET cartQty = #{cartQty}
+		WHERE cartNo = #{cartNo}
+	</update>
+	
+	<!-- 회원 정보 반환 -->
+	<select id="getMemberInfo" parameterType="string" resultType="com.spring_boot.projectEx.model.MemberVO">
+		SELECT memId, memName, memHP, memZipcode, memAddress1, memAddress2
+		FROM member
+		WHERE memId = #{memId}
+	</select>
+	
+	<!-- 주문 완료 처리 -->
+	<!-- 주문 정보(수령인) 저장 -->
+	<insert id="insertOrderInfo" parameterType="com.spring_boot.projectEx.model.OrderInfoVO">
+		INSERT INTO order_info(ordNo, memId, ordReceiver, ordRcvZipcode,
+  								ordRcvAddress1, ordRcvAddress2, ordRcvPhone, 
+  								ordRcvMsg, ordPay)
+  		VALUES(#{ordNo}, #{memId}, #{ordRcvReceiver}, #{ordRcvZipcode},
+  					   #{ordRcvAddress1}, #{ordRcvAddress2}, #{ordRcvPhone}, 
+  					   #{ordRcvMsg},#{ordPay})
+	</insert>
+	
+	<!-- 주문상품 정보 저장 : 파라미터 memId, ordNo 전달, 상품정보는 cart 테이블에서 추출 후 insert 연결 -->
+	<insert id="insertOrderProduct">
+		INSERT INTO order_product(ordNo, prdNo, ordQty)
+		SELECT #{ordNo}, prdNo, cartQty
+		FROM cart WHERE memId=#{memId}
+	</insert>
+	
+	<!-- 주문 완료 후 주문 회원의 장바구니 내용 삭제 : memId -->
+	<delete id="deleteCartAfterOrder">
+		DELETE FROM cart
+		WHERE memId = #{memId}
+		
+	</delete>
 	
 </mapper>

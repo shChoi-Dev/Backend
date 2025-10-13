@@ -3,6 +3,27 @@
 */
 
 $(document).ready(function(){
+	// 주문수량 변경 처리
+	let amount = $('.amount') // 총 구매 예정 금액
+	let price = $('.price') // 상품 가격
+	let sum = 0;
+	
+	$.each($('.cartQty'),function(i){
+		$(this).on('keyup', function(index){
+			let qty = $(this).val();
+			amount[i].dataset.amount = (price[i].dataset.price * qty); // span 태그 속성 변경
+			amount[i].innerHTML = (price[i].dataset.price * qty).toLocaleString(); // span 태그 내부 text 변경
+			sumAmount(); // 총 구매예정 금액 계산
+			$('#total').text(sum.toLocaleString());
+		})
+	})
+	
+	function sumAmount(){
+		$('.amount').each(function(){
+			sum+=Number($(this).attr("data-amount"))
+		});
+	}
+	
 	// [전체 선택] 체크박스 체크 했을 떄
 	$('#allCheck').on('click', function(){
 		let chk = $('#allCheck').prop("checked");
@@ -30,7 +51,7 @@ $(document).ready(function(){
 	
 	// 삭제 버튼 클릭했을 때 장바구니에서 선택된 상품 삭제
 	$('#deleteCartBtn').on('click',function(){
-		$('.chkDelete').is(':checked'); // 선택여부 반환(여러 체크박스 중 한개라도 체크되어 있으면 true, 아니면 false)
+		 let checked = $('.chkDelete').is(':checked'); // 선택여부 반환(여러 체크박스 중 한개라도 체크되어 있으면 true, 아니면 false)
 		
 		if(checked){// 하나라도 체크된 경우
 			let answer = confirm("선택된 상품을 삭제하시겠습니까?");
@@ -43,7 +64,7 @@ $(document).ready(function(){
 				}); // each 끝
 				
 				$.ajax({
-					type:post,
+					type:"post",
 					url:"/product/deleteCart",
 					data:{"chkbox":checkArr},
 					dataType:"text",

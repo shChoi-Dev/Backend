@@ -25,36 +25,38 @@
 	        		<h3>주문자 정보</h3>
 	        		<table border="1" width="800">
 	        			<tr><th>주문자</th>
-	        					<td width="200">  </td>
+	        					<td width="200"> ${memVo.memName} 
+	        						<input type="hidden" name="memId" value="${memVo.memId}">
+	        					</td>
 	        					<th>연락처</th>
-	        					<td></td></tr>
+	        					<td>${hp1}-${hp2}-${hp3}</td></tr>
 	        		</table><br>
 	        	
 	        		<!-- (2) 수령인 정보 : 기본 회원 정보로 출력 (수정 가능) -->
 	        		<h3>주문자 정보</h3>
 	        		<table border="1" width="800">
 	        			<tr><th>수령인</th>
-	        						<td width="200"><input type="text" name="ordRcvReceiver" value=""></td>
+	        						<td width="200"><input type="text" name="ordRcvReceiver" value="${memVo.memName}"></td>
 	        					<th>연락처</th>
 	        						<td>
-	        							<input type="text" name="hp1" value="" size="3"> - 
-	        							<input type="text" name="hp2" value="" size="4"> - 
-	        							<input type="text" name="hp3" value="" size="4"></td></tr>
+	        							<input type="text" name="hp1" value="${hp1}" size="3"> - 
+	        							<input type="text" name="hp2" value="${hp2}" size="4"> - 
+	        							<input type="text" name="hp3" value="${hp3}" size="4"></td></tr>
 	        			<tr><th>배송지 주소</th>
 	        					<td colspan="3">
 			        				<input type="text" id="ordRcvZipcode" name="ordRcvZipcode" size="5" 
-			        								value="$" readonly>
+			        								value="${memVo.memZipcode}" readonly>
 				            		<input type="button" id="searchZipBtn" name="searchZipBtn" value="우편번호 찾기"><br>
 				            		<input type="text" id="ordRcvAddress1" name="ordRcvAddress1" placeholder="주소 입력" size="70" 
-				            		             value="" readonly> <br>
+				            		             value="${memVo.memAddress1}" readonly> <br>
 				            		<input type="text" id="ordRcvAddress2" name="ordRcvAddress2" placeholder="상세 주소 입력" size="70"
-				            		             value="" >
+				            		             value="${memVo.memAddress2}" >
 	        					</td></tr>
 	        		  <tr><th>배송 메시지</th>
 	        		  		 <td colspan="3"><select name="ordRcvMsg">
 	        		  		 		<option value="배송전 전화주세요">배송전 전화주세요</option>
 	        		  		 		<option value="부재중 전화주세요">부재중 전화주세요</option>
-	        		  		 		<option value="부재중 문얖에 놓고 가세요">부재중 문얖에 놓고 가세요</option>	        		  		 		
+	        		  		 		<option value="부재중 문앞에 놓고 가세요">부재중 문앞에 놓고 가세요</option>	        		  		 		
 	        		  		 		</select></td></tr>
 	        		</table><br>
 	        		
@@ -71,7 +73,7 @@
 					<c:forEach var="prd" items="${cartList }">
 			            <tr>
 			              <td>${prd.prdNo}</td>
-			               <td><img src="<c:url value='/prd_images/${prd.prdImg}' />" width="50" height="30"></td>			              
+			               <td><img src="<c:url value='/product_images/${prd.prdImg}' />" width="50" height="30"></td>			              
 			               <td>${prd.prdName }</td>
 			               <td  align="right"><fmt:formatNumber value="${prd.prdPrice }" pattern="#,###" /> 원</td>
 			               <td><input type="text" class="cartQty"  name="cartQty" value="${prd.cartQty }" size="1" readonly>

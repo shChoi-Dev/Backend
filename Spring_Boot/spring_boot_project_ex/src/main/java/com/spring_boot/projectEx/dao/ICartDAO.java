@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.spring_boot.projectEx.model.CartVO;
+import com.spring_boot.projectEx.model.MemberVO;
+import com.spring_boot.projectEx.model.OrderInfoVO;
 
 public interface ICartDAO {
 	// 장바구니 및 주문관련 작업 처리시 필요한 메소드들
@@ -18,4 +20,11 @@ public interface ICartDAO {
 	public ArrayList<CartVO> cartList(String memId);
 	// 장바구니 상품 삭제
 	public void deleteCart(ArrayList<String> chkArr);
+	
+	// 주문 처리 작업에 필요한 메소드 추가
+	public void updateCart(CartVO vo); // 주문 전 장바구니 수정했을 경우를 위한 메소드
+	public MemberVO getMemberInfo(String memId);
+	public void insertOrderInfo(OrderInfoVO ordInfoVo);
+	public void insertOrderProduct(HashMap<String, Object> map);
+	public void deleteCartAfterOrder(String memId);
 }
