@@ -11,7 +11,7 @@ public class MemberVO {
 	private String memEmail;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date memJoinDate;
-	private String memHP;
+	private String memHp;
 	private String memZipcode;
 	private String memAddress1;
 	private String memAddress2;
@@ -47,10 +47,10 @@ public class MemberVO {
 		this.memJoinDate = memJoinDate;
 	}
 	public String getMemHP() {
-		return memHP;
+		return memHp;
 	}
 	public void setMemHP(String memHP) {
-		this.memHP = memHP;
+		this.memHp = memHP;
 	}
 	public String getMemZipcode() {
 		return memZipcode;

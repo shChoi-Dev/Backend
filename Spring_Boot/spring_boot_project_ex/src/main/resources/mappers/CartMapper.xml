@@ -86,7 +86,10 @@
 	<delete id="deleteCartAfterOrder">
 		DELETE FROM cart
 		WHERE memId = #{memId}
-		
 	</delete>
+	
+	<select id="orderList" parameterType="string" resultType="com.spring_boot.projectEx.model.OrderInfoVO">
+    SELECT * FROM order_info WHERE memId = #{memId} ORDER BY ordDate DESC
+	</select>
 	
 </mapper>

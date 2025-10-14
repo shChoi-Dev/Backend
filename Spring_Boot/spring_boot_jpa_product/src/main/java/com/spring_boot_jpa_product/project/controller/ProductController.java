@@ -143,8 +143,8 @@ public class ProductController {
 	// 상품 검색 방법2
 	@ResponseBody
 	@RequestMapping("/product/productSearch1")
-	public List<ProductDTO> productSearch1(@RequestParam HashMap<String, Object> param) {
-		List<ProductDTO> prdList = productService.productSearch(param);		
+	public ArrayList<ProductDTO> productSearch1(@RequestParam HashMap<String, String> param) {
+		ArrayList<ProductDTO> prdList = productService.productSearch(param);		
 		return prdList;
 	}
 

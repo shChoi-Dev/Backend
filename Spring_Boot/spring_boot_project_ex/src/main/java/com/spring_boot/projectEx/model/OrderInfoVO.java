@@ -1,8 +1,10 @@
 package com.spring_boot.projectEx.model;
 
+import java.util.Date;
+
 public class OrderInfoVO {
 	private String ordNo;
-	private String ordDate;
+	private Date ordDate;
 	private String memId;
 	private String ordRcvReceiver;
 	private String ordRcvZipcode;
@@ -18,10 +20,10 @@ public class OrderInfoVO {
 	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
 	}
-	public String getOrdDate() {
+	public Date getOrdDate() {
 		return ordDate;
 	}
-	public void setOrdDate(String ordDate) {
+	public void setOrdDate(Date ordDate) {
 		this.ordDate = ordDate;
 	}
 	public String getMemId() {

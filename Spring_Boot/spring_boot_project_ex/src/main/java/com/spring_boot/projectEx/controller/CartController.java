@@ -7,6 +7,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -109,7 +110,7 @@ public class CartController {
 							  @RequestParam String hp1,
 							  @RequestParam String hp2,
 							  @RequestParam String hp3) {
-		
+	
 		// 전화번호 설정
 		String hp = hp1 + "-" + hp2 + "-" + hp3;
 		ordInfoVo.setOrdRcvPhone(hp);
@@ -119,13 +120,13 @@ public class CartController {
 		long timeNum = System.currentTimeMillis();
 		SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMddHHmmss");
 		String strTime = dayTime.format(new Date(timeNum));
-		
+	
 		// 랜덤숫자 4개
 		String rNum="";
 		for(int i=1; i<4; i++) {
 			rNum += (int)(Math.random()*10);
 		}
-		
+	
 		String ordNo = strTime + "_" + rNum;
 		// 주문번호 저장
 		ordInfoVo.setOrdNo(ordNo);
@@ -138,4 +139,16 @@ public class CartController {
 		return "product/orderCompleteView";
 	}
 	
+	// (추가) 주문 내역 조회
+    @GetMapping("/product/myOrder")
+    public String myOrder(HttpSession session, Model model) {
+        String memId = (String) session.getAttribute("sid");
+        
+        // 서비스를 통해 해당 회원의 주문 정보 목록을 가져옴
+        ArrayList<OrderInfoVO> orderList = cartService.orderList(memId);
+        
+        model.addAttribute("orderList", orderList);
+        
+        return "product/myOrderListView"; // 뷰 페이지로 전달
+    }
 }

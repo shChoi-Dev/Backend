@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,4 +99,72 @@ public class MemberController {
 		memService.insertMember(vo);
 		return "redirect:/member/loginForm";
 	}
+	
+	// (추가) 마이페이지 뷰를 반환하는 메소드
+    @GetMapping("/member/myPage")
+    public String myPage() {
+        return "mypage";
+    }
+	
+    // (추가) 회원 정보 수정 폼으로 이동
+    @GetMapping("/member/myInfoUpdateForm")
+    public String myInfoUpdateForm(HttpSession session, Model model) {
+        String memId = (String) session.getAttribute("sid");
+        // 서비스를 통해 현재 로그인된 회원의 모든 정보를 가져옵니다.
+        MemberVO memVo = memService.getMemberInfo(memId);
+        
+        // 전화번호를 '-' 기준으로 분리합니다.
+        String[] hp = memVo.getMemHP().split("-");
+        
+        model.addAttribute("memVo", memVo);
+        model.addAttribute("hp1", hp[0]);
+        model.addAttribute("hp2", hp[1]);
+        model.addAttribute("hp3", hp[2]);
+        
+        return "member/myInfoUpdateForm"; // 해당 경로에 JSP 파일을 생성해야 합니다.
+    }
+    
+    // (추가) 회원 정보 수정 처리
+    @PostMapping("/member/updateMember")
+    public String updateMember(MemberVO vo,
+                               @RequestParam("memHp1") String memHp1,
+                               @RequestParam("memHp2") String memHp2,
+                               @RequestParam("memHp3") String memHp3) {
+        String memHp = memHp1 + "-" + memHp2 + "-" + memHp3;
+        vo.setMemHP(memHp);
+        
+        memService.updateMember(vo);
+        
+        // 정보 수정 후 마이페이지로 리다이렉트
+        return "redirect:/member/myPage"; 
+    }
+    
+    // (추가) 회원 탈퇴 폼으로 이동
+    @GetMapping("/member/deleteForm")
+    public String deleteForm() {
+        return "member/deleteForm";
+    }
+    
+    // (추가) 회원 탈퇴 처리
+    @PostMapping("/member/deleteMember")
+    public String deleteMember(@RequestParam("pwd") String pwd, HttpSession session) {
+        String memId = (String) session.getAttribute("sid");
+        
+        // 비밀번호 확인 로직
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", memId);
+        map.put("pwd", pwd);
+        
+        String result = memService.loginCheck(map); // 기존 로그인 체크 로직 재활용
+        
+        if (result.equals("success")) {
+            // 비밀번호가 일치하면 회원 탈퇴 처리
+            memService.deleteMember(memId);
+            session.invalidate(); // 세션 무효화
+            return "redirect:/"; // 메인 페이지로 리다이렉트
+        } else {
+            // 비밀번호 불일치 시, 다시 탈퇴 폼으로
+            return "redirect:/member/deleteForm"; 
+        }
+    }
 }

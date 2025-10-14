@@ -35,10 +35,10 @@ public interface IProductService {
 	public String prdNoCheck(String prdNo); // 상품번호 전달해서 이 번호가 존재하는지 확인
 	
 	// 상품 검색 방법1
-	// public ArrayList<ProductDTO> productSearch(HashMap<String, Object> map);
+	public ArrayList<ProductDTO> productSearch(HashMap<String, String> map);
 	
 	// 상품 검색 방법2
-	public List<ProductDTO> productSearch(HashMap<String, Object> map);
+	//public List<ProductDTO> productSearch(HashMap<String, Object> map);
 }
 
 

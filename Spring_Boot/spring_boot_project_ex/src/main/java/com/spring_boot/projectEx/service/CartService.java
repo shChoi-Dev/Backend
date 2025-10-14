@@ -92,4 +92,10 @@ public class CartService implements ICartService {
 		
 	}
 	
+	// (추가) 주문 내역 조회
+    @Override
+    public ArrayList<OrderInfoVO> orderList(String memId) {
+        return dao.orderList(memId);
+    }
+	
 }

@@ -27,4 +27,7 @@ public interface ICartService {
 	public void insertOrderInfo(OrderInfoVO ordInfoVo);
 	public void insertOrderProduct(HashMap<String, Object> map);
 	public void deleteCartAfterOrder(String memId);
+	
+	// (추가) 주문 내역 조회
+	ArrayList<OrderInfoVO> orderList(String memId);
 }

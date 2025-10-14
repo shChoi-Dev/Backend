@@ -28,4 +28,30 @@
     			#{memZipcode}, #{memAddress1}, #{memAddress2})
 	</insert>
 	
+	<!-- 회원 정보 조회 -->
+	<select id="getMemberInfo" parameterType="string" resultType="com.spring_boot.projectEx.model.MemberVO">
+    	SELECT * FROM member WHERE memId=#{memId}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="com.spring_boot.projectEx.model.MemberVO">
+	    UPDATE member
+	    SET 
+	        memName = #{memName},
+	        memEmail = #{memEmail},
+	        memHP = #{memHP},
+	        memZipcode = #{memZipcode},
+	        memAddress1 = #{memAddress1},
+	        memAddress2 = #{memAddress2}
+	    <if test="memPwd != null and memPwd != ''">
+	        , memPwd = #{memPwd}
+	    </if>
+	    WHERE memId = #{memId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="string">
+    	DELETE FROM member WHERE memId = #{memId}
+	</delete>
+	
+	
 </mapper>

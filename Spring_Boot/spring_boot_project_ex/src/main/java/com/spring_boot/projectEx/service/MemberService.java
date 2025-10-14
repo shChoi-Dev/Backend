@@ -50,5 +50,27 @@ public class MemberService implements IMemberService{
 		
 		dao.insertMember(vo);
 	}
+
+	 // (추가) 회원 정보 조회
+	@Override
+	public MemberVO getMemberInfo(String memId) {
+		return dao.getMemberInfo(memId);
+	}
+
+	@Override
+	public void updateMember(MemberVO vo) {
+	// 비밀번호가 입력되었을 경우에만 암호화하여 저장
+        if (vo.getMemPwd() != null && !vo.getMemPwd().isEmpty()) {
+            String encodedPwd = pwdEncoder.encode(vo.getMemPwd());
+            vo.setMemPwd(encodedPwd);
+        }
+        dao.updateMember(vo);
+    }
+
+	// (추가) 회원 탈퇴
+	@Override
+	public void deleteMember(String memId) {
+		dao.deleteMember(memId);
+	}
 		
 }
