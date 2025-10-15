@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -83,7 +85,7 @@ public class MemberController {
 									@RequestParam("memHp2") String memHp2,
 									@RequestParam("memHp3") String memHp3) { // 전화번호 3개 별도로 받아서(파라미터로), 다 더해서,vo에 저장(setter 사용해서) 
 		String memHp = memHp1 + "-" + memHp2 + "-" + memHp3;
-		//dto.setMemHP(memHp);	
+		dto.updateHp(memHp);	
 		memService.insertMember(dto); 
 		return "redirect:/member/loginForm"; 
 	}
@@ -99,5 +101,25 @@ public class MemberController {
 		MemberDTO myInfo = memService.myInfoUpdateForm(memId);
 		model.addAttribute("myInfo",myInfo);
 		return "member/updateForm";
+	}
+	
+	@PostMapping("/member/myInfoUpdate")
+	public String myInfoUpdate(MemberDTO dto, Model model, 
+			@RequestParam("memHp1") String memHp1,
+			@RequestParam("memHp2") String memHp2,
+			@RequestParam("memHp3") String memHp3) {  
+			String memHp = memHp1 + "-" + memHp2 + "-" + memHp3;
+			dto.updateHp(memHp);
+			memService.myInfoUpdate(dto);
+			model.addAttribute("state", "update");
+			return "member/mypage";
+	}
+	
+	@GetMapping("/member/myInfoDelete")
+	public String myInfoDelete(HttpSession session) {
+		String memId = (String)session.getAttribute("sid");
+		memService.myInfoDelete(memId);
+		session.invalidate();
+		return "redirect:/";
 	}
 }

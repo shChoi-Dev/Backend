@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.spring_boot_jpa_projectEx.project.entity.MemberEntity;
 import com.spring_boot_jpa_projectEx.project.repository.MemberRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class MemberDAO implements IMemberDAO {
 	@Autowired
@@ -22,26 +24,32 @@ public class MemberDAO implements IMemberDAO {
 
 	@Override
 	public String idCheck(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		// return memRepo.findById(id).get().getMemId();
+		return memRepo.searchById(id);
 	}
 
 	@Override
 	public void insertMember(MemberEntity entity) {
-		// TODO Auto-generated method stub
-		
+		memRepo.save(entity); // Repo의 기본 메소드
 	}
 
 	@Override
 	public Optional<MemberEntity> myInfoUpdateForm(String memId) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return memRepo.findById(memId);
 	}
 
 	@Override
+	@Transactional
 	public void myInfoUpdate(MemberEntity entity) {
-		// TODO Auto-generated method stub
-		
+		//update 진행 - 기본 제공 메소드 save()
+		String tmpPwd = memRepo.findById(entity.getMemId()).get().getMemPwd();
+		entity.keepPwd(tmpPwd);
+		memRepo.save(entity);
+	}
+
+	@Override
+	public void myInfoDelete(String memId) {
+		memRepo.deleteById(memId); // db 주문 내역관련이 없는 경우만 삭제됨 아니면 오류
 	}
 
 }

@@ -21,6 +21,15 @@ public class MemberDTO {
 	private String memZipcode;
 	private String memAddress1;
 	private String memAddress2;	
+	
+	// 핸드폰, 비밀번호 변경 메소드
+	public void updatePwd(String encodedPwd) {
+		this.memPwd = encodedPwd;
+	}
+	
+	public void updateHp(String hp) {
+		this.memHP = hp;
+	}
 		
 	public static MemberDTO toDto(MemberEntity entity) {
 		return MemberDTO.builder()

@@ -42,7 +42,6 @@ public class MemberService implements IMemberService {
 
 	@Override
 	public String idCheck(String id) {
-		// TODO Auto-generated method stub
 		return memberServiceDataHandle.idCheck(id);
 	}
 	
@@ -54,22 +53,25 @@ public class MemberService implements IMemberService {
 		//setter 사용해서 암호화된 값으로 설정한 다음 
 		// vo를 mapper에게 전달
 		String encodedPwd = pwdEncoder.encode(dto.getMemPwd()); 
-		//dto.setMemPwd(encodedPwd);	 
-		//memberServiceDataHandle.insertMember(dto); 
+		dto.updatePwd(encodedPwd);	 
+		memberServiceDataHandle.insertMember(MemberEntity.toEntity(dto)); // dto -> entity
 	
 	}
 	
 	@Override
 	public MemberDTO myInfoUpdateForm(String memId) {
-		// TODO Auto-generated method stub
-		memberServiceDataHandle.myInfoUpdateForm(memId);
-		return null;
+		Optional<MemberEntity> entity = memberServiceDataHandle.myInfoUpdateForm(memId);
+		return MemberDTO.toDto(entity.get());
 	}
 
 	@Override
 	public void myInfoUpdate(MemberDTO myInfo) {
-		// TODO Auto-generated method stub
-		//memberServiceDataHandle.myInfoUpdate(myInfo);		
+		memberServiceDataHandle.myInfoUpdate(MemberEntity.toEntity(myInfo));		
+	}
+
+	@Override
+	public void myInfoDelete(String memId) {
+		memberServiceDataHandle.myInfoDelete(memId);
 	}	
 
 
