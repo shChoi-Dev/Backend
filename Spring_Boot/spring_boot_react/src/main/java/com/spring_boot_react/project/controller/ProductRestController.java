@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring_boot_react.project.model.ProductVO;
@@ -29,6 +34,31 @@ public class ProductRestController {
 		
 	}
 	
+	// 상품 상세 정보 조회
+	@GetMapping("/product/productDetailView/{prdNo}")
+	public ProductVO detailViewProduct(@PathVariable String prdNo) {
+		return prdService.detailViewProduct(prdNo);
+	}
 	
+	// 상품 등록
+	@PostMapping("/product/insert")
+	public void insertProduct(ProductVO vo) {
+		prdService.insertProduct(vo);		
+	}
+	
+	// 상품정보 수정
+	//@PostMapping("/product/update")
+	//@RequestMapping("/product/update", method=RequestMethod.PUT)
+	@PutMapping("/product/update")
+	public void updateProduct(ProductVO vo) {
+		prdService.updateProduct(vo);		
+	}
+	
+	// 상품정보 삭제
+	//@GetMapping("/product/delete/{prdNo}")
+	@DeleteMapping("/product/delete/{prdNo}")
+	public void deleteProduct(@PathVariable String prdNo) {
+		prdService.deleteProduct(prdNo);		
+	}
 	
 }
