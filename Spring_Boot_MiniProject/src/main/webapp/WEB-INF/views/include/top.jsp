@@ -7,9 +7,9 @@
 
             <nav>
                 <ul>
-                    <li><a href="<c:url value='/product/category/캐리어'/>">캐리어</a></li>
-        			<li><a href="<c:url value='/product/category/여행소품'/>">여행소품</a></li>
-        			<li><a href="<c:url value='/product/category/안전용품'/>">안전용품</a></li>
+					<li><a href="<c:url value='/product/category/carrier'/>">캐리어</a></li>
+        			<li><a href="<c:url value='/product/category/props'/>">여행소품</a></li>
+        			<li><a href="<c:url value='/product/category/safety'/>">안전용품</a></li>
                 </ul>
             </nav>
 

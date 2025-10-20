@@ -32,9 +32,10 @@ public class ProductController {
     // 카테고리별 상품 목록 페이지
     @GetMapping("/product/category/{prdCategory}")
     public String getProductsByCategory(@PathVariable String prdCategory, Model model) {
-    	List<ProductDTO> productList = prdService.listProductByCategory(prdCategory);
-    	model.addAttribute("productList", productList);
-    	model.addAttribute("category", prdCategory);
-    	return "product/productList";
+        // 이 메소드가 존재하지 않거나 잘못 작성되었을 가능성이 높습니다.
+        List<ProductDTO> productList = prdService.listProductsByCategory(prdCategory);
+        model.addAttribute("prdList", productList);
+        model.addAttribute("category", prdCategory);
+        return "product/productList";
     }
 }

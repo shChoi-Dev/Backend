@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring_boot_jpa_miniProject.project.dto.ProductDTO;
@@ -27,6 +28,10 @@ public class ProductService {
 		// orElse(null)로 해당 객체가 없으면 null을 반환하도록 처리
 		return prdRepo.findById(prdNo).orElse(null);
 	}
+	
+    public List<ProductDTO> listProductsByCategory(String prdCategory) {
+        return prdRepo.findByPrdCategory(prdCategory);
+    }
 	
 	// 상품 정보 및 파일 업로드
 	public void addProduct(ProductDTO product, MultipartFile file) throws IOException{
