@@ -42,7 +42,7 @@ public class JwtService {
 			
 			// user 있으면
 			if(user != null) {
-				return user;
+				return user; // 토큰은 유효하고 인증자에 대한 정보 반환
 			}
 		}
 		return null;
